@@ -1,21 +1,21 @@
 help:
 	@echo "Use these to get started:\n\
-	  submodules    Update the submodules\n\
 	  packages      Install required packages\n\
+	  submodules    Update the submodules\n\
 	  certificates  Regenerate certificates\n\
 	  buildcore     Build Arrowhead Core\n\
 	  tunedatabase  Increase number of connections\n\
 	  run           Run Arrowhead Core services"
 
-all: submodules packages certificates buildcore tunedatabase
+all: packages submodules certificates buildcore tunedatabase
+
+packages:
+	@echo "Downloading required packages..."
+	sudo apt-get install git default-jdk mariadb-server tmux
 
 submodules:
 	@echo "Updating submodules..."
 	git submodule update --init .
-
-packages:
-	@echo "Downloading required packages..."
-	sudo apt-get install default-jdk mariadb-server
 
 certificates:
 	@echo "Creating folder for certificates..."
