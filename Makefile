@@ -1,11 +1,12 @@
 help:
 	@echo "Use these to get started:\n\
-	  submodules\tUpdate the submodules\n\
-	  packages\tInstall required packages\n\
-	  buildcore\tBuild Arrowhead Core\n\
-	  run\tRun Arrowhead Core services"
+	  submodules    Update the submodules\n\
+	  packages      Install required packages\n\
+	  buildcore     Build Arrowhead Core\n\
+	  tunedatabase  Increase number of connections\n\
+	  run           Run Arrowhead Core services"
 
-all: submodules packages buildcore
+all: submodules packages buildcore tunedatabase
 
 submodules:
 	@echo "Updating submodules..."
@@ -18,6 +19,11 @@ packages:
 buildcore:
 	@echo "Building Arrowhead Core..."
 	cd ./core-java-spring && mvn install -DskipTests
+
+tunedatabase:
+	@echo "Tuning the database by increasing the number of connections..."
+	@echo "This should remove the 'Too many connections' exceptions."
+	sudo sed "s/#\(max_connections .*\)/\1/g" -i /etc/mysql/mariadb.conf.d/50-server.cnf
 
 run:
 	@tmux new-session \; \
