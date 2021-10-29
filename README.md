@@ -73,6 +73,14 @@ The core services are build using:
 cd ./core-java-spring && mvn install -DskipTests
 ```
 
+### Database filling
+
+We have to create tables for Arrowhead Framework. Also, we need to give access to all the core systems. The passwords in this file should match the passwords in the configuration of each core system.
+```sh
+sudo mysql -u root < ./scripts/create_empty_arrowhead_db.sql
+```
+
+
 ### Database tuning
 
 _Note: This is maybe not necessary after delaying the startup times._

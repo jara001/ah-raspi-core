@@ -5,11 +5,12 @@ help:
 	  modulepatch   Patch the submodules\n\
 	  certificates  Regenerate certificates\n\
 	  buildcore     Build Arrowhead Core\n\
+	  filldatabase	Delete and rebuild the database along with privileges\n\
 	  tunedatabase  Increase number of connections\n\
 	  run           Run Arrowhead Core services\n\
 	  run-minimal   Run only the main three core services"
 
-all: packages submodules certificates buildcore tunedatabase
+all: packages submodules certificates buildcore filldatabase tunedatabase
 
 packages:
 	@echo "Downloading required packages..."
@@ -39,6 +40,10 @@ certificates:
 buildcore:
 	@echo "Building Arrowhead Core..."
 	cd ./core-java-spring && mvn install -DskipTests
+
+filldatabase:
+	@echo "Deleting and recreating the database..."
+	cd ./core-java-spring/scripts && sudo mysql -u root < create_empty_arrowhead_db.sql
 
 tunedatabase:
 	@echo "Tuning the database by increasing the number of connections..."
