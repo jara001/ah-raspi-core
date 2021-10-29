@@ -5,7 +5,8 @@ help:
 	  certificates  Regenerate certificates\n\
 	  buildcore     Build Arrowhead Core\n\
 	  tunedatabase  Increase number of connections\n\
-	  run           Run Arrowhead Core services"
+	  run           Run Arrowhead Core services\n\
+	  run-minimal   Run only the main three core services"
 
 all: packages submodules certificates buildcore tunedatabase
 
@@ -38,6 +39,12 @@ tunedatabase:
 	@echo "Tuning the database by increasing the number of connections..."
 	@echo "This should remove the 'Too many connections' exceptions."
 	sudo sed "s/#\(max_connections .*\)/\1/g" -i /etc/mysql/mariadb.conf.d/50-server.cnf
+
+run-minimal:
+	@tmux new-session \; \
+	rename-window "ServiceRegistry" \; send-keys "cd ./core-java-spring/serviceregistry/target/" Enter \; send-keys "java -jar arrowhead-serviceregistry-4.3.0.jar" Enter \; \
+	new-window \; rename-window "Authorization" \; send-keys "cd ./core-java-spring/authorization/target/" Enter \; send-keys "sleep 80s" Enter \; send-keys "java -jar arrowhead-authorization-4.3.0.jar" Enter \; \
+	new-window \; rename-window "Orchestrator" \; send-keys "cd ./core-java-spring/orchestrator/target/" Enter \; send-keys "sleep 150s" Enter \; send-keys "java -jar arrowhead-orchestrator-4.3.0.jar" Enter \;
 
 run:
 	@tmux new-session \; \

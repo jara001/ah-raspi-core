@@ -8,10 +8,10 @@ get Arrowhead Core working on Raspberry Pi.
 To start right up, clone the repository and run:
 ```sh
 make all
-make run
+make run-minimal
 ```
 
-This should (after a lot of minutes) prepare the environment and run the Arrowhead Core systems. The default configuration is set to `*.testcloud2.aitia.arrowhead.eu` cloud. Therefore, all services and systems using certificates from `testcloud2` should be able to connect right away.
+This should (after a lot of minutes) prepare the environment and run the main three Arrowhead Core systems. The default configuration is set to `*.testcloud2.aitia.arrowhead.eu` cloud. Therefore, all services and systems using certificates from `testcloud2` should be able to connect right away.
 
 
 ## Notes for the project
@@ -90,3 +90,10 @@ make run
 ```
 
 Which opens up a tmux session with all the core services. They start up in a specific order, forced by calling `sleep`. This solves _MAX CONNECTIONS_ exceptions.
+
+We can also run:
+```sh
+make run-minimal
+```
+
+Which launches only _Service Registry_, _Authorization_ and _Choreographer_.
