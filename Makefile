@@ -42,11 +42,11 @@ tunedatabase:
 run:
 	@tmux new-session \; \
 	rename-window "ServiceRegistry" \; send-keys "cd ./core-java-spring/serviceregistry/target/" Enter \; send-keys "java -jar arrowhead-serviceregistry-4.3.0.jar" Enter \; \
-	new-window \; rename-window "Authorization" \; send-keys "cd ./core-java-spring/authorization/target/" Enter \; send-keys "sleep 180s" Enter \; send-keys "java -jar arrowhead-authorization-4.3.0.jar" Enter \; \
-	new-window \; rename-window "Gateway" \; send-keys "cd ./core-java-spring/gateway/target/" Enter \; send-keys "sleep 210s" Enter \; send-keys "java -jar arrowhead-gateway-4.3.0.jar" Enter \; \
-	new-window \; rename-window "EventHandler" \; send-keys "cd ./core-java-spring/eventhandler/target/" Enter \; send-keys "sleep 240s" Enter \; send-keys "java -jar arrowhead-eventhandler-4.3.0.jar" Enter \; \
-	new-window \; rename-window "DataManager" \; send-keys "cd ./core-java-spring/datamanager/target/" Enter \; send-keys "sleep 270s" Enter \; send-keys "java -jar arrowhead-datamanager-4.3.0.jar" Enter \; \
-	new-window \; rename-window "Gatekeeper" \; send-keys "cd ./core-java-spring/gatekeeper/target/" Enter \; send-keys "sleep 300s" Enter \; send-keys "java -jar arrowhead-gatekeeper-4.3.0.jar" Enter \; \
-	new-window \; rename-window "Orchestrator" \; send-keys "cd ./core-java-spring/orchestrator/target/" Enter \; send-keys "sleep 330s" Enter \; send-keys "java -jar arrowhead-orchestrator-4.3.0.jar" Enter \; \
-	new-window \; rename-window "Choreographer" \; send-keys "cd ./core-java-spring/choreographer/target/" Enter \; send-keys "sleep 360s" Enter \; send-keys "java -jar arrowhead-choreographer-4.3.0.jar" Enter \; \
-	new-window \; rename-window "CertificateAuthority" \; send-keys "cd ./core-java-spring/certificate-authority/target/" Enter \; send-keys "sleep 390s" Enter \; send-keys "java -jar arrowhead-certificate-authority-4.3.0.jar" Enter \;
+	new-window \; rename-window "Authorization" \; send-keys "cd ./core-java-spring/authorization/target/" Enter \; send-keys "sleep 80s" Enter \; send-keys "java -jar arrowhead-authorization-4.3.0.jar" Enter \; \
+	new-window \; rename-window "Gateway" \; send-keys "cd ./core-java-spring/gateway/target/" Enter \; send-keys "sleep 220s" Enter \; send-keys "java -jar arrowhead-gateway-4.3.0.jar" Enter \; \
+	new-window \; rename-window "EventHandler" \; send-keys "cd ./core-java-spring/eventhandler/target/" Enter \; send-keys "sleep 290s" Enter \; send-keys "java -jar arrowhead-eventhandler-4.3.0.jar" Enter \; \
+	new-window \; rename-window "DataManager" \; send-keys "cd ./core-java-spring/datamanager/target/" Enter \; send-keys "sleep 360s" Enter \; send-keys "java -jar arrowhead-datamanager-4.3.0.jar" Enter \; \
+	new-window \; rename-window "Gatekeeper" \; send-keys "cd ./core-java-spring/gatekeeper/target/" Enter \; send-keys "sleep 420s" Enter \; send-keys "java -jar arrowhead-gatekeeper-4.3.0.jar" Enter \; \
+	new-window \; rename-window "Orchestrator" \; send-keys "cd ./core-java-spring/orchestrator/target/" Enter \; send-keys "sleep 150s" Enter \; send-keys "java -jar arrowhead-orchestrator-4.3.0.jar" Enter \; \
+	new-window \; rename-window "Choreographer" \; send-keys "cd ./core-java-spring/choreographer/target/" Enter \; send-keys "sleep 480s" Enter \; send-keys "java -jar arrowhead-choreographer-4.3.0.jar" Enter \; \
+	new-window \; rename-window "CertificateAuthority" \; send-keys "cd ./core-java-spring/certificate-authority/target/" Enter \; send-keys "sleep 560s" Enter \; send-keys "java -jar arrowhead-certificate-authority-4.3.0.jar" Enter \;
