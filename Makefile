@@ -49,7 +49,8 @@ run-minimal:
 	@tmux new-session \; \
 	rename-window "ServiceRegistry" \; send-keys "cd ./core-java-spring/serviceregistry/target/" Enter \; send-keys "java -jar arrowhead-serviceregistry-4.3.0.jar" Enter \; \
 	new-window \; rename-window "Authorization" \; send-keys "cd ./core-java-spring/authorization/target/" Enter \; send-keys "sleep 80s" Enter \; send-keys "java -jar arrowhead-authorization-4.3.0.jar" Enter \; \
-	new-window \; rename-window "Orchestrator" \; send-keys "cd ./core-java-spring/orchestrator/target/" Enter \; send-keys "sleep 150s" Enter \; send-keys "java -jar arrowhead-orchestrator-4.3.0.jar" Enter \;
+	new-window \; rename-window "Orchestrator" \; send-keys "cd ./core-java-spring/orchestrator/target/" Enter \; send-keys "sleep 150s" Enter \; send-keys "java -jar arrowhead-orchestrator-4.3.0.jar" Enter \; \
+	next-window \;
 
 run:
 	@tmux new-session \; \
@@ -65,4 +66,5 @@ run:
 	new-window \; rename-window "Onboarding" \; send-keys "cd ./core-java-spring/onboarding/target/" Enter \; send-keys "sleep 630s" Enter \; send-keys "java -jar arrowhead-onboarding-4.3.0.jar" Enter \; \
 	new-window \; rename-window "DeviceRegistry" \; send-keys "cd ./core-java-spring/deviceregistry/target/" Enter \; send-keys "sleep 700s" Enter \; send-keys "java -jar arrowhead-deviceregistry-4.3.0.jar" Enter \; \
 	new-window \; rename-window "SystemRegistry" \; send-keys "cd ./core-java-spring/systemregistry/target/" Enter \; send-keys "sleep 770s" Enter \; send-keys "java -jar arrowhead-systemregistry-4.3.0.jar" Enter \; \
-	new-window \; rename-window "Translator" \; send-keys "cd ./core-java-spring/translator/target/" Enter \; send-keys "sleep 840s" Enter \; send-keys "java -jar arrowhead-translator-4.3.0.jar" Enter \;
+	new-window \; rename-window "Translator" \; send-keys "cd ./core-java-spring/translator/target/" Enter \; send-keys "sleep 840s" Enter \; send-keys "java -jar arrowhead-translator-4.3.0.jar" Enter \; \
+	next-window \;
