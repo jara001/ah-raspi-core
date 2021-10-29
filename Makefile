@@ -2,11 +2,12 @@ help:
 	@echo "Use these to get started:\n\
 	  submodules    Update the submodules\n\
 	  packages      Install required packages\n\
+	  certificates  Regenerate certificates\n\
 	  buildcore     Build Arrowhead Core\n\
 	  tunedatabase  Increase number of connections\n\
 	  run           Run Arrowhead Core services"
 
-all: submodules packages buildcore tunedatabase
+all: submodules packages certificates buildcore tunedatabase
 
 submodules:
 	@echo "Updating submodules..."
@@ -15,6 +16,19 @@ submodules:
 packages:
 	@echo "Downloading required packages..."
 	sudo apt-get install default-jdk mariadb-server
+
+certificates:
+	@echo "Creating folder for certificates..."
+	test -d certificates || mkdir certificates
+	@echo "Duplicating master certificates..."
+	cp ./core-java-spring/certificates/master* ./ah-certgen/
+	@echo "Duplicating cloud truststore..."
+	cp ./core-java-spring/certificates/testcloud2/testcloud2* ./certificates/
+	@echo "Generating new certificates..."
+	PASSWORD=123456 FOLDER="../certificates/" DOMAIN="aitia" CLOUD="testcloud2" bash ./ah-certgen/generate.sh service_registry authorization gateway event_handler datamanager gatekeeper orchestrator choreographer certificate_authority
+	@echo "Replacing old certificates..."
+	find ./core-java-spring -name \*.p12 | grep main/resources | xargs -n 1 -I'{}' bash -c "basename '{}' && test -f ./certificates/'{}' | xargs -n 1 -I'()' cp ./certificates/'()' '{}'"
+	find ./core-java-spring -name \*.pub | grep main/resources | xargs -n 1 -I'{}' bash -c "basename '{}' && test -f ./certificates/'{}' | xargs -n 1 -I'()' cp ./certificates/'()' '{}'"
 
 buildcore:
 	@echo "Building Arrowhead Core..."
