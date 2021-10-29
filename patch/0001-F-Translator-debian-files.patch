@@ -1,0 +1,82 @@
+From 3060c03bc6b358a74fdf3978f4e8184c0fc4928d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jaroslav=20Klap=C3=A1lek?= <klapajar@fel.cvut.cz>
+Date: Fri, 29 Oct 2021 13:40:09 +0200
+Subject: [PATCH] (F) Translator debian files
+
+Translator debian package was corrupted. It threw a lot of warnings that the maintainer
+is missing. In addition, control scripts were executed as 'sh' while being 'bash'.
+---
+ translator/src/deb/control/config   | 2 +-
+ translator/src/deb/control/control  | 2 +-
+ translator/src/deb/control/postinst | 2 +-
+ translator/src/deb/control/postrm   | 2 +-
+ translator/src/deb/control/preinst  | 2 +-
+ translator/src/deb/control/prerm    | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/translator/src/deb/control/config b/translator/src/deb/control/config
+index fa0d07324..b29a131e7 100644
+--- a/translator/src/deb/control/config
++++ b/translator/src/deb/control/config
+@@ -1,4 +1,4 @@
+-#!/bin/sh -e
++#!/bin/bash -e
+ 
+ . /usr/share/debconf/confmodule
+ 
+diff --git a/translator/src/deb/control/control b/translator/src/deb/control/control
+index d53c3fd71..580bc7a9f 100644
+--- a/translator/src/deb/control/control
++++ b/translator/src/deb/control/control
+@@ -3,7 +3,7 @@ Version: [[version]]
+ Section: contrib/java
+ Priority: optional
+ Architecture: all
+-Maintainer: 
++Maintainer: Rajmund Bocsi <rbocsi@aitia.ai>
+ Homepage: http://www.arrowhead.eu
+ Description: Arrowhead Translator System
+ Distribution: development
+diff --git a/translator/src/deb/control/postinst b/translator/src/deb/control/postinst
+index 1c30d2294..f05c4f967 100644
+--- a/translator/src/deb/control/postinst
++++ b/translator/src/deb/control/postinst
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ # postinst script for arrowhead-translator
+ #
+ # see: dh_installdeb(1)
+diff --git a/translator/src/deb/control/postrm b/translator/src/deb/control/postrm
+index 616d11adb..6736df09d 100644
+--- a/translator/src/deb/control/postrm
++++ b/translator/src/deb/control/postrm
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ # postrm script for arrowhead-translator
+ #
+ # see: dh_installdeb(1)
+diff --git a/translator/src/deb/control/preinst b/translator/src/deb/control/preinst
+index d001e3854..7a65a0efc 100644
+--- a/translator/src/deb/control/preinst
++++ b/translator/src/deb/control/preinst
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ # preinst script for arrowhead-translator
+ #
+ # see: dh_installdeb(1)
+diff --git a/translator/src/deb/control/prerm b/translator/src/deb/control/prerm
+index 0aabd4ff7..2beed7e9d 100644
+--- a/translator/src/deb/control/prerm
++++ b/translator/src/deb/control/prerm
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ # prerm script for arrowhead-translator
+ #
+ # see: dh_installdeb(1)
+-- 
+2.20.1
+

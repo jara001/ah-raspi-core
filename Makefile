@@ -2,6 +2,7 @@ help:
 	@echo "Use these to get started:\n\
 	  packages      Install required packages\n\
 	  submodules    Update the submodules\n\
+	  modulepatch   Patch the submodules\n\
 	  certificates  Regenerate certificates\n\
 	  buildcore     Build Arrowhead Core\n\
 	  tunedatabase  Increase number of connections\n\
@@ -17,6 +18,10 @@ packages:
 submodules:
 	@echo "Updating submodules..."
 	git submodule update --init .
+
+modulepatch:
+	@echo "Patching submodules..."
+	cd ./core-java-spring && git apply ../patch/*
 
 certificates:
 	@echo "Creating folder for certificates..."
