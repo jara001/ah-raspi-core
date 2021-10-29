@@ -57,7 +57,7 @@ cp ./core-java-spring/certificates/testcloud2/testcloud2* ./certificates/
 
 The certificates are generated using:
 ```sh
-PASSWORD=123456 FOLDER="../certificates/" DOMAIN="aitia" CLOUD="testcloud2" bash ./ah-certgen/generate.sh service_registry authorization gateway event_handler datamanager gatekeeper orchestrator choreographer certificate_authority
+PASSWORD=123456 FOLDER="../certificates/" DOMAIN="aitia" CLOUD="testcloud2" bash ./ah-certgen/generate.sh service_registry authorization gateway event_handler datamanager gatekeeper orchestrator choreographer certificate_authority onboarding_controller device_registry system_registry translator
 ```
 
 And then we copy them to their appropriate location (we overwrite existing files):
