@@ -3,4 +3,4 @@
 	url = https://github.com/eclipse-arrowhead/core-java-spring
 [submodule "ah-certgen"]
 	path = ah-certgen
-	url = https://github.com/jara001/ah-certgen
+	url = https://github.com/CTU-IIG/ah-certgen
