@@ -62,8 +62,8 @@ PASSWORD=123456 FOLDER="../certificates/" DOMAIN="aitia" CLOUD="testcloud2" bash
 
 And then we copy them to their appropriate location (we overwrite existing files):
 ```sh
-find ./core-java-spring -name \*.p12 | grep main/resources | xargs -n 1 -I'{}' bash -c "basename '{}' && test -f ./certificates/'{}' | xargs -n 1 -I'()' cp ./certificates/'()' '{}'"
-find ./core-java-spring -name \*.pub | grep main/resources | xargs -n 1 -I'{}' bash -c "basename '{}' && test -f ./certificates/'{}' | xargs -n 1 -I'()' cp ./certificates/'()' '{}'"
+find ./core-java-spring -name \*.p12 | grep main/resources | xargs -n 1 -I'{}' bash -c "basename '{}' | xargs -n 1 -I'()' bash -c \"test -f ./certificates/'()' && cp ./certificates/'()' '{}'\""
+find ./core-java-spring -name \*.pub | grep main/resources | xargs -n 1 -I'{}' bash -c "basename '{}' | xargs -n 1 -I'()' bash -c \"test -f ./certificates/'()' && cp ./certificates/'()' '{}'\""
 ```
 
 ### Core building

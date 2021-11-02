@@ -34,8 +34,8 @@ certificates:
 	@echo "Generating new certificates..."
 	PASSWORD=123456 FOLDER="../certificates/" DOMAIN="aitia" CLOUD="testcloud2" bash ./ah-certgen/generate.sh service_registry authorization gateway event_handler datamanager gatekeeper orchestrator choreographer certificate_authority onboarding_controller device_registry system_registry translator
 	@echo "Replacing old certificates..."
-	find ./core-java-spring -name \*.p12 | grep main/resources | xargs -n 1 -I'{}' bash -c "basename '{}' && test -f ./certificates/'{}' | xargs -n 1 -I'()' cp ./certificates/'()' '{}'"
-	find ./core-java-spring -name \*.pub | grep main/resources | xargs -n 1 -I'{}' bash -c "basename '{}' && test -f ./certificates/'{}' | xargs -n 1 -I'()' cp ./certificates/'()' '{}'"
+	find ./core-java-spring -name \*.p12 | grep main/resources | xargs -n 1 -I'{}' bash -c "basename '{}' | xargs -n 1 -I'()' bash -c \"test -f ./certificates/'()' && cp ./certificates/'()' '{}'\""
+	find ./core-java-spring -name \*.pub | grep main/resources | xargs -n 1 -I'{}' bash -c "basename '{}' | xargs -n 1 -I'()' bash -c \"test -f ./certificates/'()' && cp ./certificates/'()' '{}'\""
 
 buildcore:
 	@echo "Building Arrowhead Core..."
