@@ -105,3 +105,53 @@ make run-minimal
 ```
 
 Which launches only _Service Registry_, _Authorization_ and _Choreographer_.
+
+
+## Debian installers
+
+Along with the Arrowhead Core systems, `.deb` files are created inside `./core-java-spring/target`.
+
+**Warning!** By default, both installations are not compatible (they overwrite the MySQL passwords, etc.). If you want to be able to use both (direct java and debian) you need to set all passwords properly.
+
+### Installing the Core systems
+
+At first, we install the core package:
+```sh
+sudo dpkg -i arrowhead-core-common*
+```
+
+During the installation it requires some input from user. To be compatible with already created certificates, use `Authorized` installation method and specify the path to the created cloud truststore.
+
+Afterwards, you can install the rest of the core systems.
+```sh
+sudo dpkg -i arrowhead-serviceregistry* arrowhead-authorization* arrowhead-orchestrator*
+```
+
+Or simply:
+```sh
+sudo dpkg -i arrowhead*
+```
+
+### Uninstalling the Core systems
+
+To remove the package (and eventually all the systems) you have to:
+
+1. Remove the packages: `sudo apt remove --purge arr\*`
+
+2. Remove the arrowhead configuration folder: `sudo rm -rf /etc/arrowhead`
+
+3. Remove the configuration of packages: `sudo rm -rf /usr/share/arrowhead`
+
+### Purging the database
+
+To remove any traces from the database (and restore it to the default state), you have to:
+
+1. Stop the database: `sudo service mysql stop`
+
+2. Remove the database from the system: `sudo rm -rf /var/lib/mysql`
+
+3. Recreate the database: `sudo mysql_install_db`
+
+4. Start the service: `sudo service mysql start`
+
+5. Install the database: `sudo mysql_secure_installation`
