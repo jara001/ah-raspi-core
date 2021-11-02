@@ -132,6 +132,45 @@ Or simply:
 sudo dpkg -i arrowhead*
 ```
 
+### Maintaining certificates
+
+Debian installation also brings several scripts that come up from the `core-common` package. They are used for maintaining and generating certificates:
+```sh
+arrowhead
+ah_gen_system_cert.sh
+ah_gen_relay_cert.sh
+```
+
+#### Generate certificate for a system
+
+To generate a certificate for new system, we call:
+```sh
+/usr/bin/ah_gen_system_cert.sh SYSTEM_NAME PASSWORD [SYSTEM_HOST] [SYSTEM_IP] [ADDITIONAL_HOST_OR_IP]
+```
+
+Note that this scripts (as for the 4.3.0) needs to be called with sudo, e.g.,
+```sh
+sudo ah_gen_system_cert.sh newsystem 123456 localhost 127.0.0.1 ip:192.168.1.2
+```
+
+The certificate is generated to folder `SYSTEM_NAME` as `SYSTEM_NAME.p12` along with `truststore.p12`. Unfortunately, both certificates are owned by `root`, so this is also required:
+```sh
+sudo chown pi SYSTEM_NAME/*
+```
+
+Public key of the system is shown in the terminal. All you need is to put it into a file `SYSTEM_NAME.pub`, like:
+```ini
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyxw7OMHft33H69BgLiXm
+iNI1nTo2mdRIoDru0q5BLg0RQOKZD4woSeDd7LYNV1p66YAZWEan6+TUi5EGC8kX
+naLNL52nwal3p1/2TAY+p+95OtI9iUVfI5pzfyxEVxc1nqV40F70XNKoFduPWLFw
+YaSEg3cXaBiUSiCgTsMQzoEZQ9o7ueTxnUrBgx0UlsuQQOdKagTJMfuTF1/2IKMt
+lVgnHZ5/yVTRtsaUlage+TG/9tto2pxd3TWj5rTGGLDbkKSg4BP9YOHcTTnJZNbG
+1bnRwgDrpEPI4TaK6GNOQicRTiKLjv79/EyGFJzgTkcPJ0lW4pc9Al/2Dx15z9L6
+owIDAQAB
+-----END PUBLIC KEY-----
+```
+
 ### Uninstalling the Core systems
 
 To remove the package (and eventually all the systems) you have to:
