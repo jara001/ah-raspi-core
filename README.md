@@ -222,7 +222,8 @@ Certificate called `sysop` is used to access web interfaces of the core system. 
 
 However, for some unknown reason, OpenJDK's keytool generates certificates with _improperly formated DER-encoded message_. Therefore, we use openssl-only method:
 ```sh
-SYSOP_PASS="PASSWORD"
+SYSTEM_NAME="sysop"
+SYSTEM_PASS="PASSWORD"
 
 TMP_DIR=$(mktemp -d)
 CLOUD_NAME=$(cat /etc/arrowhead/arrowhead.cfg | grep cloudname= | cut -d= -f2-)
@@ -231,23 +232,23 @@ OPERATOR=$(cat /etc/arrowhead/arrowhead.cfg | grep operator= | cut -d= -f2-)
 pushd "$TMP_DIR"
 
 # Create certificate request
-sudo openssl req -newkey rsa:2048 -keyout sysop.key.pem -out sysop.req.pem -nodes -subj /CN=sysop."$CLOUD_NAME"."$OPERATOR".arrowhead.eu
+sudo openssl req -newkey rsa:2048 -keyout "$SYSTEM_NAME".key.pem -out "$SYSTEM_NAME".req.pem -nodes -subj /CN="$SYSTEM_NAME"."$CLOUD_NAME"."$OPERATOR".arrowhead.eu
 
 # Split cloud .p12 into .pem(s)
 sudo openssl pkcs12 -in /etc/arrowhead/clouds/"$CLOUD_NAME".p12 -passin "pass:$CLOUD_PASS" -out "$CLOUD_NAME".crt.pem -clcerts -nokeys
 sudo openssl pkcs12 -in /etc/arrowhead/clouds/"$CLOUD_NAME".p12 -passin "pass:$CLOUD_PASS" -out "$CLOUD_NAME".key.pem -nocerts -nodes
 
-# Generate pem for sysop
-sudo openssl x509 -req -days 365 -in sysop.req.pem -out sysop.pem -CA "$CLOUD_NAME".crt.pem -CAkey "$CLOUD_NAME".key.pem -CAcreateserial
+# Generate pem for system
+sudo openssl x509 -req -days 365 -in "$SYSTEM_NAME".req.pem -out "$SYSTEM_NAME".pem -CA "$CLOUD_NAME".crt.pem -CAkey "$CLOUD_NAME".key.pem -CAcreateserial
 
-# Create sysop .p12 file
-sudo openssl pkcs12 -export -in sysop.pem -inkey sysop.key.pem -out sysop.p12 -passout "pass:$SYSOP_PASS" -name sysop
+# Create system .p12 file
+sudo openssl pkcs12 -export -in "$SYSTEM_NAME".pem -inkey "$SYSTEM_NAME".key.pem -out "$SYSTEM_NAME".p12 -passout "pass:$SYSTEM_PASS" -name "$SYSTEM_NAME"
 
 # Move back the certicate and delete the folder (softly)
-sudo rm "$CLOUD_NAME".crt.pem "$CLOUD_NAME".crt.srl "$CLOUD_NAME".key.pem sysop.key.pem sysop.pem sysop.req.pem
+sudo rm "$CLOUD_NAME".crt.pem "$CLOUD_NAME".crt.srl "$CLOUD_NAME".key.pem "$SYSTEM_NAME".key.pem "$SYSTEM_NAME".pem "$SYSTEM_NAME".req.pem
 popd
-sudo mv "$TMP_DIR"/sysop.p12 .
-sudo chown "$USER" sysop.p12
+sudo mv "$TMP_DIR"/"$SYSTEM_NAME".p12 .
+sudo chown "$USER" "$SYSTEM_NAME".p12
 rmdir "$TMP_DIR"
 ```
 
