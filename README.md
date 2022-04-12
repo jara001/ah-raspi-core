@@ -109,7 +109,10 @@ Which launches only _Service Registry_, _Authorization_ and _Choreographer_.
 
 ## Debian installers
 
-Along with the Arrowhead Core systems, `.deb` files are created inside `./core-java-spring/target`.
+Along with the Arrowhead Core systems, `.deb` files are created inside `./core-java-spring/target`. If you opt in using Debian installers right from the start, you can skip some steps of the Makefile:
+```sh
+make packages modulepatch buildcore
+```
 
 **Warning!** By default, both installations are not compatible (they overwrite the MySQL passwords, etc.). If you want to be able to use both (direct java and debian) you need to set all passwords properly.
 
@@ -169,6 +172,15 @@ lVgnHZ5/yVTRtsaUlage+TG/9tto2pxd3TWj5rTGGLDbkKSg4BP9YOHcTTnJZNbG
 1bnRwgDrpEPI4TaK6GNOQicRTiKLjv79/EyGFJzgTkcPJ0lW4pc9Al/2Dx15z9L6
 owIDAQAB
 -----END PUBLIC KEY-----
+```
+
+The whole procedure can be also done using:
+```sh
+export SYSTEM_NAME="newsystem"
+
+sudo ah_gen_system_cert.sh "$SYSTEM_NAME" 123456 localhost 127.0.0.1 ip:192.168.1.2
+sudo chown -R pi "$SYSTEM_NAME"
+keytool -list -keystore "$SYSTEM_NAME/$SYSTEM_NAME.p12" -storepass 123456 -rfc | openssl x509 -inform pem -pubkey -noout > "$SYSTEM_NAME/$SYSTEM_NAME.pub"
 ```
 
 ### Uninstalling the Core systems
