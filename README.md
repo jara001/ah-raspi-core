@@ -176,11 +176,14 @@ owIDAQAB
 
 The whole procedure can be also done using:
 ```sh
-export SYSTEM_NAME="newsystem"
+generate_certificate() {
+    SYSTEM_NAME="$1"
+    sudo ah_gen_system_cert.sh "$@"
+    sudo chown -R "$USER" "$SYSTEM_NAME"
+    keytool -list -keystore "$SYSTEM_NAME/$SYSTEM_NAME.p12" -storepass "$2" -rfc | openssl x509 -inform pem -pubkey -noout > "$SYSTEM_NAME/$SYSTEM_NAME.pub"
+}
 
-sudo ah_gen_system_cert.sh "$SYSTEM_NAME" 123456 localhost 127.0.0.1 ip:192.168.1.2
-sudo chown -R pi "$SYSTEM_NAME"
-keytool -list -keystore "$SYSTEM_NAME/$SYSTEM_NAME.p12" -storepass 123456 -rfc | openssl x509 -inform pem -pubkey -noout > "$SYSTEM_NAME/$SYSTEM_NAME.pub"
+generate_certificate testingsystem 123456 localhost 127.0.0.1
 ```
 
 ### Uninstalling the Core systems
