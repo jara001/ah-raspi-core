@@ -2,6 +2,24 @@
 This repository should contain a straightforward manual on how to
 get Arrowhead Core working on Raspberry Pi.
 
+- [Quick start](#quick-start)
+- [Notes](#notes-for-the-project)
+  - [Packages](#packages)
+  - [Submodules](#submodules)
+  - [Certificates](#certificates)
+  - [Core building](#core-building)
+  - [Database filling](#database-filling)
+  - [Database tuning](#database-tuning)
+  - [Run the core](#run-the-core)
+- [Debian installers](#debian-installers)
+  - [Installing Core systems](#installing-the-core-systems)
+  - [Maintaining certificates](#maintaining-certificates)
+    - [System certificate](#generate-certificate-for-a-system)
+    - [CA certificate](#generate-certificate-authority-ca-file)
+    - [Sysop certificate](#generate-system-operator-sysop-certificate)
+  - [Uninstalling Core systems](#uninstalling-the-core-systems)
+  - [Purging database](#purging-the-database)
+
 
 ## Quick start
 
